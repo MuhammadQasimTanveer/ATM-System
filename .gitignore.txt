@@ -1,0 +1,21 @@
+# Compiled output
+build/
+dist/
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# IDE files
+nbproject/private/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
