@@ -11,7 +11,7 @@ public class Login extends JFrame implements ActionListener
     JPasswordField pf2;
     JButton b1, b2, b3;
 
-    Color primaryColor = new Color(0x5B8FF9);      // Nice Blue
+    Color primaryColor = new Color(0x5B8FF9);      // Blue
     Color backgroundColor = new Color(0xF5F7FA);   // Light Grey
     Color buttonColor = new Color(0x5B8FF9);       // Blue
     Color clearButtonColor = new Color(0xFF6B6B);  // Coral Red
@@ -183,7 +183,7 @@ public class Login extends JFrame implements ActionListener
         else if (ae.getSource() == b3) 
         {
             setVisible(false);
-            //new Signup().setVisible(true);
+            new Signup().setVisible(true);
         }
     }
 
