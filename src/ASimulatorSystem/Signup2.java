@@ -328,7 +328,7 @@ public class Signup2 extends JFrame implements ActionListener
                 JOptionPane.INFORMATION_MESSAGE
             );
             
-            //new Signup3(formno).setVisible(true);
+            new Signup3(formno).setVisible(true);
             setVisible(false);
         }
     }
