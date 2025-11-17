@@ -3,6 +3,7 @@ package ASimulatorSystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
 import com.toedter.calendar.JDateChooser;
 import java.util.*;
 
@@ -19,10 +20,10 @@ public class Signup extends JFrame implements ActionListener
     long first4 = (ran.nextLong() % 9000L) + 1000L;
     String formno = "" + Math.abs(first4);
 
-    Color primaryColor = new Color(0x5B8FF9);    
-    Color backgroundColor = new Color(0xF5F7FA);   
-    Color buttonColor = new Color(0x5B8FF9);      
-    Color textColor = new Color(0x2C3E50);        
+    Color primaryColor = new Color(0x5B8FF9);      // Blue
+    Color backgroundColor = new Color(0xF5F7FA);   // Light Grey
+    Color buttonColor = new Color(0x5B8FF9);       // Blue
+    Color textColor = new Color(0x2C3E50);         // Dark Grey
     
     Font headingFont = new Font("Arial", Font.BOLD, 32);
     Font subHeadingFont = new Font("Arial", Font.PLAIN, 16);
@@ -336,16 +337,63 @@ public class Signup extends JFrame implements ActionListener
             JOptionPane.showMessageDialog(this, "Please enter a valid state.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
         }
+            
+        Conn c1 = new Conn();
         
-        JOptionPane.showMessageDialog(
-            this,
-            "Step 1 completed successfully!",
-            "Success",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+        try
+        {
+            c1.c.setAutoCommit(false);
+           
+            String q1 = "INSERT INTO signup VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                
+            PreparedStatement ps = c1.c.prepareStatement(q1);
 
-        new Signup2(formno).setVisible(true);
-        setVisible(false);
+            ps.setString(1, formno);
+            ps.setString(2, name);
+            ps.setString(3, father_name);
+            ps.setString(4, dob);
+            ps.setString(5, gender);
+            ps.setString(6, email);
+            ps.setString(7, marital_status);
+            ps.setString(8, address);
+            ps.setString(9, city);
+            ps.setString(10, state);
+
+            ps.executeUpdate();
+                
+            c1.c.commit();
+            c1.c.setAutoCommit(true);
+                
+            JOptionPane.showMessageDialog(
+                this,
+                "Personal details saved successfully. Continue to the next step.",
+                "Step 1 Completed",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+
+            new Signup2(formno).setVisible(true);
+            setVisible(false);
+        }
+        catch(Exception e)
+        {
+            try 
+            { 
+                c1.c.rollback(); 
+            } 
+            catch (SQLException rbEx) 
+            { 
+                rbEx.printStackTrace(); 
+            }
+               
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                this,
+                "Something went wrong. Please try again.",
+                "System Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }  
     }
     
     public static void main(String[] args)

@@ -3,6 +3,7 @@ package ASimulatorSystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
 
 public class Signup2 extends JFrame implements ActionListener
 {
@@ -14,10 +15,10 @@ public class Signup2 extends JFrame implements ActionListener
     
     String formno;
     
-    Color primaryColor = new Color(0x5B8FF9);  
-    Color backgroundColor = new Color(0xF5F7FA);  
-    Color buttonColor = new Color(0x5B8FF9);     
-    Color textColor = new Color(0x2C3E50);         
+    Color primaryColor = new Color(0x5B8FF9);      // Blue
+    Color backgroundColor = new Color(0xF5F7FA);   // Light Grey
+    Color buttonColor = new Color(0x5B8FF9);       // Blue
+    Color textColor = new Color(0x2C3E50);         // Dark Grey
     
     Font headingFont = new Font("Arial", Font.BOLD, 32);
     Font subHeadingFont = new Font("Arial", Font.PLAIN, 16);
@@ -89,6 +90,7 @@ public class Signup2 extends JFrame implements ActionListener
         gbc.gridy = 0;
         formPanel.add(c1, gbc);
 
+        // Row 2: Nationality
         l3 = new JLabel("Nationality:");
         l3.setFont(labelFont);
         l3.setForeground(textColor);
@@ -128,6 +130,7 @@ public class Signup2 extends JFrame implements ActionListener
         gbc.gridy = 2;
         formPanel.add(c3, gbc);
 
+        // Row 4: Education
         l5 = new JLabel("Education:");
         l5.setFont(labelFont);
         l5.setForeground(textColor);
@@ -145,6 +148,7 @@ public class Signup2 extends JFrame implements ActionListener
         gbc.gridy = 3;
         formPanel.add(c4, gbc);
 
+        // Row 5: Occupation
         l6 = new JLabel("Occupation:");
         l6.setFont(labelFont);
         l6.setForeground(textColor);
@@ -320,16 +324,62 @@ public class Signup2 extends JFrame implements ActionListener
                     return;
                 }
             }
+                
+            Conn c1 = new Conn();
             
-            JOptionPane.showMessageDialog(
+            try
+            {
+                c1.c.setAutoCommit(false);
+                
+                String q1 = "INSERT INTO signup2 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                
+                PreparedStatement ps = c1.c.prepareStatement(q1);
+
+                ps.setString(1, formno);
+                ps.setString(2, religion);
+                ps.setString(3, nationality);
+                ps.setString(4, income);
+                ps.setString(5, education);
+                ps.setString(6, occupation);
+                ps.setString(7, CNIC);
+                ps.setString(8, seniorcitizen);
+                ps.setString(9, existingaccount);
+
+                ps.executeUpdate();
+                
+                c1.c.commit();
+                c1.c.setAutoCommit(true);
+                
+                JOptionPane.showMessageDialog(
                 this,
-                "Step 2 completed successfully!",
-                "Success",
+                "Additional Information saved successfully. Continue to the next step.",
+                "Step 2 Completed",
                 JOptionPane.INFORMATION_MESSAGE
-            );
-            
-            new Signup3(formno).setVisible(true);
-            setVisible(false);
+                );
+                
+                new Signup3(formno).setVisible(true);
+                setVisible(false);
+            }
+            catch(Exception e)
+            {
+                try 
+                { 
+                    c1.c.rollback(); 
+                } 
+                catch (SQLException rbEx) 
+                { 
+                    rbEx.printStackTrace(); 
+                }
+               
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Something went wrong. Please try again.",
+                    "System Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }       
         }
     }
     

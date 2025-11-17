@@ -3,6 +3,7 @@ package ASimulatorSystem;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
 import java.util.*;
 
 public class Signup3 extends JFrame implements ActionListener 
@@ -45,7 +46,7 @@ public class Signup3 extends JFrame implements ActionListener
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25, 70, 25, 70));
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/bank.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("imagesicons/bank.png"));
         Image i2 = i1.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(i2));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -237,17 +238,66 @@ public class Signup3 extends JFrame implements ActionListener
                 return;
             }
 
-            JOptionPane.showMessageDialog(this, 
-                    "<html><div style='text-align:center;'>"
-                    + "<h2 style='color:green;'>Account Created Successfully!</h2><br>"
-                    + "<p><b>Card Number:</b> " + cardno + "<br><br>"
-                    + "<b>PIN:</b> " + pin + "</p></div></html>",
-                    "Success", 
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            Conn c1 = new Conn();
 
-            new Login().setVisible(true);
-            setVisible(false);
+            try 
+            {
+                c1.c.setAutoCommit(false);
+                String q1 = "INSERT INTO signup3(formNo, accountType, cardno, pin) VALUES (?, ?, ?, ?)";
+                // Prepare the statement using the connection object
+                PreparedStatement ps1 = c1.c.prepareStatement(q1);   // c1.c refers to your Connection object
+                
+                // Set the values for each placeholder in the SQL query
+                ps1.setString(1, formno);
+                ps1.setString(2, atype);
+                ps1.setString(3, cardno);
+                ps1.setString(4, pin);
+                ps1.executeUpdate();    // Execute the insert query
+
+                String[] services = {"ATM Card", "Mobile Banking", "Transaction Notifications"};
+                for (String service : services) 
+                {
+                    String q2 = "INSERT INTO account_services(formNo, serviceName) VALUES (?, ?)";
+                    PreparedStatement ps2 = c1.c.prepareStatement(q2);
+                    ps2.setString(1, formno);
+                    ps2.setString(2, service);
+                    ps2.executeUpdate();
+                }
+
+                String q3 = "INSERT INTO users(cardno, pin) VALUES (?, ?)";
+                PreparedStatement psUsers = c1.c.prepareStatement(q3);
+                psUsers.setString(1, cardno);
+                psUsers.setString(2, pin);
+                psUsers.executeUpdate();
+
+                c1.c.commit();
+                c1.c.setAutoCommit(true);
+
+                JOptionPane.showMessageDialog(this, 
+                        "<html><div style='text-align:center;'>"
+                        + "<h2 style='color:green;'>Account Created Successfully!</h2><br>"
+                        + "<p><b>Card Number:</b> " + cardno + "<br><br>"
+                        + "<b>PIN:</b> " + pin + "</p></div></html>",
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+                new Login().setVisible(true);
+                setVisible(false);
+            } 
+            catch (Exception e) 
+            {
+                try 
+                {
+                    c1.c.rollback();
+                } 
+                catch (SQLException rbEx) 
+                {
+                    rbEx.printStackTrace();
+                }
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Something went wrong. Please try again.", "System Error", JOptionPane.ERROR_MESSAGE);
+            }
         } 
         else if (ae.getSource() == b2) 
         {
