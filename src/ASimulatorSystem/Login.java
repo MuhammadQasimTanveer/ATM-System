@@ -227,7 +227,7 @@ public class Login extends JFrame implements ActionListener
                     );
                     
                     setVisible(false);
-                    //new Transactions(pin, cardno).setVisible(true);
+                    new Transactions(pin, cardno).setVisible(true);
                 }
                 else
                 {
