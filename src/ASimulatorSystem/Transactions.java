@@ -97,7 +97,7 @@ public class Transactions extends JFrame implements ActionListener{
         if(ae.getSource()==b1)
         { 
             setVisible(false);
-            //new Deposit(pin, cardno).setVisible(true);
+            new Deposit(pin, cardno).setVisible(true);
         }
         
         else if(ae.getSource()==b2)
