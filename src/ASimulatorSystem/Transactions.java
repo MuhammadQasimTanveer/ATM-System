@@ -126,7 +126,7 @@ public class Transactions extends JFrame implements ActionListener{
         else if(ae.getSource()==b6)
         { 
             this.setVisible(false);
-            //new BalanceEnquiry(pin, cardno).setVisible(true);
+            new BalanceEnquiry(pin, cardno).setVisible(true);
         }
         
         else if(ae.getSource()==b7)
