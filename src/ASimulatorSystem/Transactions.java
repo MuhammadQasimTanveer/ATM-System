@@ -114,7 +114,8 @@ public class Transactions extends JFrame implements ActionListener{
         
         else if(ae.getSource()==b4)
         { 
-            //new MiniStatement(pin, cardno).setVisible(true);
+            MiniStatement pdf = new MiniStatement(pin, cardno);
+            pdf.generatePDF();
         }
         
         else if(ae.getSource()==b5)
