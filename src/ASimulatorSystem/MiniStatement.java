@@ -37,19 +37,21 @@ public class MiniStatement
             float margin = 50;
             float yStart = 750;
             float y = yStart;
-            float leading = 18;
+            float leading = 18;        //gap between each line
 
             String bankName = "Aurora Bank - MINI STATEMENT";
-            float titleWidth = fontBold.getStringWidth(bankName) / 1000 * 22;
+            float titleWidth = fontBold.getStringWidth(bankName) / 1000 * 22;  //width in pixels
+            
+            //make title center 
             float titleX = (PDRectangle.A4.getWidth() - titleWidth) / 2;
 
-            cs.setNonStrokingColor(new Color(0, 51, 102));
-            cs.beginText();
+            cs.setNonStrokingColor(new Color(0, 51, 102)); //Text fill color stroking = outline, non-stroking = fill).
+            cs.beginText();                 //Start Writing Text
             cs.setFont(fontBold, 22);
-            cs.newLineAtOffset(titleX, y);
-            cs.showText(bankName);
+            cs.newLineAtOffset(titleX, y);    //position
+            cs.showText(bankName);          //Draw the Title
             cs.endText();
-            y -= 70;
+            y -= 70;                        //create space/gap after 
 
             Conn c = new Conn();
             String name = "";
@@ -106,9 +108,9 @@ public class MiniStatement
             float rowHeight = 16;
 
             cs.setNonStrokingColor(Color.LIGHT_GRAY);
-            cs.addRect(margin - 5, y - 2, 500, rowHeight);
+            cs.addRect(margin - 5, y - 2, 500, rowHeight);    //built-in-method to draw rectangle
             cs.fill();
-            cs.setNonStrokingColor(Color.BLACK);
+            cs.setNonStrokingColor(Color.BLACK);       // rectangle border draw
 
             cs.beginText();
             cs.setFont(fontBold, 12);
@@ -221,9 +223,7 @@ public class MiniStatement
 
             //AUTO OPEN PDF
             Desktop.getDesktop().open(new File(filePath));
-
             System.out.println("PDF Generated & Opened Successfully");
-
         } 
         catch (Exception e) 
         {

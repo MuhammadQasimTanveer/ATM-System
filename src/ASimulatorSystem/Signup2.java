@@ -34,8 +34,6 @@ public class Signup2 extends JFrame implements ActionListener
         
         setLayout(new GridBagLayout());
         GridBagConstraints gbcOuter = new GridBagConstraints();
-        gbcOuter.gridx = 0;
-        gbcOuter.gridy = 0;
         gbcOuter.anchor = GridBagConstraints.CENTER;
 
         JPanel mainPanel = new JPanel();
@@ -381,10 +379,5 @@ public class Signup2 extends JFrame implements ActionListener
                 );
             }       
         }
-    }
-    
-    public static void main(String[] args)
-    {
-        new Signup2("").setVisible(true);
     }
 }

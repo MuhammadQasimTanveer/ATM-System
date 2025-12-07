@@ -304,9 +304,4 @@ public class Signup3 extends JFrame implements ActionListener
             System.exit(0);
         }
     }
-
-    public static void main(String[] args) 
-    {
-        new Signup3("").setVisible(true);
-    }
 }

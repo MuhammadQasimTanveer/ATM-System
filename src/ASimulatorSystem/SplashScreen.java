@@ -39,8 +39,7 @@ public class SplashScreen extends JFrame implements Runnable {
         panel.add(statusLabel);
 
         add(panel, BorderLayout.CENTER);
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2 - 40);
+        setLocationRelativeTo(null);
 
         setVisible(true);
         thread = new Thread(this);

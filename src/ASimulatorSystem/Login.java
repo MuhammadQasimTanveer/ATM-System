@@ -268,9 +268,4 @@ public class Login extends JFrame implements ActionListener
             new Signup().setVisible(true);
         }
     }
-
-    public static void main(String[] args) 
-    {
-        new Login().setVisible(true);
-    }
 }

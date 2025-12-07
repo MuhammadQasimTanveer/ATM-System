@@ -191,8 +191,4 @@ public class Pin extends JFrame implements ActionListener
             setVisible(false);
         }
     }
-
-    public static void main(String[] args) {
-        new Pin("", "").setVisible(true);
-    }
 }

@@ -38,14 +38,12 @@ public class Signup extends JFrame implements ActionListener
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbcOuter = new GridBagConstraints();
-        gbcOuter.gridx = 0;
-        gbcOuter.gridy = 0;
         gbcOuter.anchor = GridBagConstraints.CENTER;
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS)); //make components of panel in Y axis
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40)); //add padding
 
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/profile (2).png"));
@@ -53,7 +51,7 @@ public class Signup extends JFrame implements ActionListener
         JLabel logoLabel = new JLabel(new ImageIcon(i2));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(logoLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));  //create gap around or below image
 
         
         l1 = new JLabel("APPLICATION FORM NO. " + formno, JLabel.CENTER);
@@ -61,7 +59,7 @@ public class Signup extends JFrame implements ActionListener
         l1.setForeground(primaryColor);
         l1.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(l1);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 8)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 8))); 
 
         l2 = new JLabel("Step 1: Personal Details", JLabel.CENTER);
         l2.setFont(subHeadingFont);
@@ -73,8 +71,8 @@ public class Signup extends JFrame implements ActionListener
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 10, 8, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(8, 10, 8, 10);             //gap/margin around
+        gbc.fill = GridBagConstraints.HORIZONTAL;          //make form components horizontal
         gbc.anchor = GridBagConstraints.WEST;
 
         
@@ -141,6 +139,7 @@ public class Signup extends JFrame implements ActionListener
         ButtonGroup groupGender = new ButtonGroup();
         groupGender.add(r1); 
         groupGender.add(r2);
+        
         JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         genderPanel.setBackground(Color.WHITE);
         genderPanel.add(r1); 
@@ -394,10 +393,5 @@ public class Signup extends JFrame implements ActionListener
                 JOptionPane.ERROR_MESSAGE
             );
         }  
-    }
-    
-    public static void main(String[] args)
-    {
-        new Signup().setVisible(true);
     }
 }

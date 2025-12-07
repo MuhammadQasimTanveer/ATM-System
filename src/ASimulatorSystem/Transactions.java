@@ -135,9 +135,4 @@ public class Transactions extends JFrame implements ActionListener{
             System.exit(0);
         }
     }
-    
-    public static void main(String[] args)
-    {
-        new Transactions("","").setVisible(true);
-    }
 }

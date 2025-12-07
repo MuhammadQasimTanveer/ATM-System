@@ -1,7 +1,8 @@
 package ASimulatorSystem;
 import java.sql.*;  
 
-public class Conn{
+public class Conn
+{
     Connection c;
     Statement s;
     public Conn()

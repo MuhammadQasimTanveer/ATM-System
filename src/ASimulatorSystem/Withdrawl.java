@@ -221,9 +221,4 @@ public class Withdrawl extends JFrame implements ActionListener{
             new Transactions(pin,cardno).setVisible(true);
         }
     }
-
-    public static void main(String[] args)
-    {
-        new Withdrawl("","").setVisible(true);
-    }
 }

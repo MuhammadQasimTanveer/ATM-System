@@ -91,9 +91,4 @@ class BalanceEnquiry extends JFrame implements ActionListener
         setVisible(false);
         new Transactions(pin, cardno).setVisible(true);
     }
-
-    public static void main(String[] args) 
-    {
-        new BalanceEnquiry("", "").setVisible(true);
-    }
 }
