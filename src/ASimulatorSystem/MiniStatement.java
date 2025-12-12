@@ -158,14 +158,7 @@ public class MiniStatement
                     String dateFormatted = new SimpleDateFormat("dd/MM/yy HH:mm").format(dt);
                     String sign = type.equalsIgnoreCase("Deposit") ? "+" : "-";
 
-                    if (alternate) 
-                    {
-                        cs.setNonStrokingColor(new Color(245, 245, 245));
-                        cs.addRect(margin - 5, y - 2, 500, rowHeight);
-                        cs.fill();
-                    }
                     cs.setNonStrokingColor(Color.BLACK);
-
                     cs.beginText();
                     cs.setFont(font, 10);
                     cs.newLineAtOffset(colDateX, y);
@@ -177,15 +170,6 @@ public class MiniStatement
                     cs.endText();
 
                     y -= rowHeight;
-                    alternate = !alternate;
-
-                    if (y < 80) {
-                        cs.close();
-                        page = new PDPage(PDRectangle.A4);
-                        document.addPage(page);
-                        cs = new PDPageContentStream(document, page);
-                        y = yStart;
-                    }
                 }
             }
 

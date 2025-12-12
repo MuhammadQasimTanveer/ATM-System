@@ -31,22 +31,18 @@ public class Login extends JFrame implements ActionListener
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; 
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 50, 40, 50));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));      //make components of panel in Y axis
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 50, 40, 50));  //add padding
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/profile.png"));
         Image i2 = i1.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(i2));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(logoLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));    //invisible component
 
 
         l1 = new JLabel("WELCOME TO ATM", JLabel.CENTER);
@@ -54,14 +50,14 @@ public class Login extends JFrame implements ActionListener
         l1.setForeground(primaryColor);
         l1.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(l1);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 30)));    //invisible component that create gap 
 
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(Color.WHITE);
+        
         GridBagConstraints fgbc = new GridBagConstraints();
-        fgbc.insets = new Insets(5, 5, 5, 5);
-        fgbc.fill = GridBagConstraints.HORIZONTAL;
-        fgbc.weightx = 1.0;
+        fgbc.insets = new Insets(15, 15, 15, 15);              //gap/margin around the components of this  grid
+        fgbc.fill = GridBagConstraints.HORIZONTAL;           
 
         l2 = new JLabel("Card No:");
         l2.setFont(labelFont);

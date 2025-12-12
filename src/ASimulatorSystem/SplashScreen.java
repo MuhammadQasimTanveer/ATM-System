@@ -35,7 +35,7 @@ public class SplashScreen extends JFrame implements Runnable {
 
         // Add components
         panel.add(logo);
-        panel.add(Box.createVerticalStrut(40));
+        panel.add(Box.createVerticalStrut(40));  //creates 40 pixels of empty vertical space and adds to panel
         panel.add(statusLabel);
 
         add(panel, BorderLayout.CENTER);

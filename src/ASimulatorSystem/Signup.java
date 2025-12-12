@@ -38,7 +38,6 @@ public class Signup extends JFrame implements ActionListener
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbcOuter = new GridBagConstraints();
-        gbcOuter.anchor = GridBagConstraints.CENTER;
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
@@ -72,7 +71,7 @@ public class Signup extends JFrame implements ActionListener
         formPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 10, 8, 10);             //gap/margin around
-        gbc.fill = GridBagConstraints.HORIZONTAL;          //make form components horizontal
+        gbc.fill = GridBagConstraints.HORIZONTAL;          //make each cell horizontal align
         gbc.anchor = GridBagConstraints.WEST;
 
         
